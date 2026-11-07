@@ -35,6 +35,10 @@ export default function Home() {
                 </p>
               </div>
               <div className="intro-actions">
+                <span className="list-number" aria-label="رقم القائمة 02">
+                  <strong>02</strong>
+                  <span>رقم القائمة</span>
+                </span>
                 <span className="list-count">
                   <strong>{candidates.length}</strong>
                   <span>مترشحًا</span>
@@ -46,7 +50,9 @@ export default function Home() {
                 />
               </div>
             </div>
-            <CandidateGrid candidates={candidates} />
+            <div id="candidates">
+              <CandidateGrid candidates={candidates} />
+            </div>
           </section>
         </main>
         <SiteFooter />

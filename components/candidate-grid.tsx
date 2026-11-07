@@ -39,16 +39,41 @@ function CandidateCard({
                 onError={() => setImageFailed(true)}
               />
             </>
-          ) : null}
+          ) : candidate.rank === "19" ? (
+            <span className="candidate-photo-placeholder anonymous-woman-sticker">
+              <span className="placeholder-icon" />
+            </span>
+          ) : (
+            <span className="candidate-photo-placeholder">
+              <span className="placeholder-icon" />
+              <span>الصورة قريبًا</span>
+            </span>
+          )}
         </span>
         <span className="candidate-ordinal" aria-hidden="true">
           {candidate.rank}
         </span>
-        <span className="candidate-caption">
-          <span className="candidate-label">مترشح {candidate.rank}</span>
-          <span className="candidate-plus" aria-hidden="true">+</span>
+        <span className="candidate-info">
+          <span className="candidate-name">{displayName}</span>
+          {(candidate.profession || candidate.education) && (
+            <span className="candidate-facts">
+              {candidate.profession && (
+                <span>
+                  <strong>المهنة:</strong> {candidate.profession}
+                </span>
+              )}
+              {candidate.education && (
+                <span>
+                  <strong>المستوى الدراسي:</strong> {candidate.education}
+                </span>
+              )}
+            </span>
+          )}
+          <span className="candidate-caption">
+            <span className="candidate-label">مترشح {candidate.rank}</span>
+            <span className="candidate-plus" aria-hidden="true">+</span>
+          </span>
         </span>
-        <span className="candidate-name-preview">{displayName}</span>
       </button>
     </article>
   );
@@ -138,6 +163,10 @@ export default function CandidateGrid({
                   sizes="(max-width: 600px) 100vw, 480px"
                   className="dialog-image"
                 />
+              ) : selectedCandidate.rank === "19" ? (
+                <span className="candidate-photo-placeholder anonymous-woman-sticker">
+                  <span className="placeholder-icon" />
+                </span>
               ) : (
                 <span className="candidate-photo-placeholder">
                   <span className="placeholder-icon" />
@@ -153,6 +182,22 @@ export default function CandidateGrid({
               <p className="dialog-rank">
                 الترتيب في القائمة: {selectedCandidate.rank}
               </p>
+              {(selectedCandidate.profession || selectedCandidate.education) && (
+                <dl className="dialog-facts">
+                  {selectedCandidate.profession && (
+                    <div>
+                      <dt>المهنة</dt>
+                      <dd>{selectedCandidate.profession}</dd>
+                    </div>
+                  )}
+                  {selectedCandidate.education && (
+                    <div>
+                      <dt>المستوى الدراسي</dt>
+                      <dd>{selectedCandidate.education}</dd>
+                    </div>
+                  )}
+                </dl>
+              )}
               {selectedCandidate.bio && (
                 <p className="dialog-bio">{selectedCandidate.bio}</p>
               )}
